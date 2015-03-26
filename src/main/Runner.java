@@ -12,6 +12,12 @@ import aviacompanies.Aviacompany;
 
 
 public class Runner {
+	
+	public static void printPlanesInfo(List<Plane> planes) {
+		for (Plane p : planes) {
+			System.out.println(p);
+		}
+	}
 
 	public static void main(String[] args) {
 		Plane p1 = new AN12("Lastochka");
@@ -27,11 +33,18 @@ public class Runner {
 		
 		Aviacompany company1 = new Aviacompany("belavia");
 		company1.addPlanesToPark(planes);
-		company1.printPlanes(planes); // TODO: aviacompany cannot print planes
-		company1.printPlanes(company1.sortPlanesByRange());
+		System.out.println("Following planes are in park ("+ company1.getName()+"):");
+		printPlanesInfo(company1.getAviapark());
+
+		System.out.println("\nPlanes sorted by range");
+		List<Plane> sortedPlanes = company1.sortPlanesByRange();
+		printPlanesInfo(sortedPlanes);
 		
+
+		// looking for a plane by specific charasteristics
 		List<Plane> searchResult = company1.findPlane(12999, 55420, 1500, 65000, 5000, 2000);
 		
+		System.out.println("\nLooking for a specific plane...");
 		for (Plane p : searchResult)
 		{
 			System.out.print("I found:... ");

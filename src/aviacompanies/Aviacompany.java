@@ -19,16 +19,14 @@ public class Aviacompany {
 	public void addPlaneToPark(Plane p) {
 		planes.add(p);
 	}
+	
+	public String getName() {
+		return m_companyName;
+	}
+	
 
 	public void addPlanesToPark(List<Plane> p ) {
 		planes.addAll(p);
-	}
-
-	public void printPlanes(List<Plane> planes) {
-		System.out.println("Following planes are in park:");
-		for (Plane p : planes) {
-			System.out.println(p);
-		}
 	}
 
 	public List<Plane> getAviapark() {
@@ -52,6 +50,7 @@ public class Aviacompany {
 	) {
 		List<Plane> result = new ArrayList<Plane>();
 		
+		
 		for (Plane p : planes) {
 			if ((p.getCapacity() >= minCapacity && p.getCapacity() <= maxCapacity)
 			||  (p.getVolume() >= minVolume && p.getVolume() <= maxVolume)
@@ -59,7 +58,7 @@ public class Aviacompany {
 				result.add(p);
 			}
 		}
-
+		
 		return result;
 	}
 }

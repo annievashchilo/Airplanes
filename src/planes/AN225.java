@@ -2,23 +2,23 @@ package planes;
 
 public class AN225 extends Plane {
 	
+	private final float capacity = 64000f;
+	private final float volume = 1300f;
+	private final float range = 15400f;
+	
 	public AN225(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public float getCapacity() {
-		float capacity = 640000;
 		return capacity;
 	}
 
 	public float getVolume() {
-		float volume = 1300;
 		return volume;
 	}
 	
 	public float getRange() {
-		float range = 15400f;
 		return range;
 	}
 
