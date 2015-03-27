@@ -2,9 +2,9 @@ package planes;
 
 public class SuperGuppy extends Plane {
 	
-	private final float capacity = 2000f;
-	private final float volume = 42420f;
-	private final float range = 14500f;
+	private final float capacity = 2000f;		// грузоподъемность
+	private final float volume = 42420f;		// объём
+	private final float range = 14500f;			// дальность полёта
 	
 	public SuperGuppy(String name) {
 		super(name);
