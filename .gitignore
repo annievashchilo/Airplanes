@@ -3,6 +3,8 @@
 .DS_Store
 .project
 .settings/
+.idea/
+*.imp
 # Mobile Tools for Java (J2ME)
 # .mtj.tmp/
 #
