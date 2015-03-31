@@ -32,4 +32,17 @@ public class AirplanesUtils {
         Collections.sort(sorted, new RangeComparator());
         return sorted;
     }
+
+    /**
+     * Method sorts all airplanes in company by speed
+     * @param planes all airplanes
+     * @return list of sorted airplanes
+     */
+    public static List<Plane> sortPlanesBySpeed(List<Plane> planes) {
+        List<Plane> sorted = new ArrayList<Plane>();
+        sorted.addAll(planes);
+        Collections.sort(sorted, new SpeedComparator());
+        return sorted;
+    }
+
 }

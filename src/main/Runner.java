@@ -40,6 +40,11 @@ public class Runner {
         List<Plane> sortedPlanes = AirplanesUtils.sortPlanesByRange(company1.getAviapark());
         AirplanesUtils.printPlanesInfo(sortedPlanes);
 
+        System.out.println("\nPlanes sorted by speed:");
+        sortedPlanes = AirplanesUtils.sortPlanesBySpeed(company1.getAviapark());
+        AirplanesUtils.printPlanesInfo(sortedPlanes);
+
+
 
         // looking for a plane by specific parameters
         List<Plane> searchResult = company1.findPlane(12999, 55420, 1500, 65000, 5000, 2000);

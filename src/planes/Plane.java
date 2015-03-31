@@ -21,15 +21,18 @@ public class Plane {
         return 0;
     }
 
+    public float getSpeed() { return 0; }
+
     @Override
     public String toString() {
         return String.format(
-                "%s '%s': v=%.2f, c=%.2f, r=%.2f",
+                "%s '%s': v=%.2f, c=%.2f, r=%.2f, s=%.2f",
                 getClass().getSimpleName(),
                 m_planeName,
                 getCapacity(),
                 getVolume(),
-                getRange()
+                getRange(),
+                getSpeed()
         );
     }
 }
