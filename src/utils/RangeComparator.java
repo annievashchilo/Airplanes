@@ -1,17 +1,17 @@
 package utils;
 
-import java.util.Comparator;
-
 import planes.Plane;
 
-public class RangeComparator implements Comparator<Plane>{
+import java.util.Comparator;
 
-	@Override
-	public int compare(Plane o1, Plane o2) {
-		Plane p1 = o1;
-		Plane p2 =  o2;
-		
-		return p1.getRange() < p2.getRange() ? -1 : p1.getRange() == p2.getRange() ? 0 : 1;
+public class RangeComparator implements Comparator<Plane> {
+
+    @Override
+    public int compare(Plane o1, Plane o2) {
+        Plane p1 = o1;
+        Plane p2 = o2;
+
+        return p1.getRange() < p2.getRange() ? -1 : p1.getRange() == p2.getRange() ? 0 : 1;
     }
-	
+
 }
