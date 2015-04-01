@@ -14,6 +14,7 @@ import java.util.List;
 public class Runner {
 
 
+    //TODO add input from console
     public static void main(String[] args) {
         // create planes
         Plane p1 = new AN12("Lastochka");
@@ -26,7 +27,6 @@ public class Runner {
         planes.add(p4);
         planes.add(p3);
         planes.add(p2);
-
 
         // create new company
         Aviacompany company1 = new Aviacompany("belavia");
@@ -44,7 +44,7 @@ public class Runner {
         sortedPlanes = AirplanesUtils.sortPlanesBySpeed(company1.getAviapark());
         AirplanesUtils.printPlanesInfo(sortedPlanes);
 
-
+        System.out.println("\nCommon capacity of all planes of aviacompany: " + company1.getCommonCapacity());
 
         // looking for a plane by specific parameters
         List<Plane> searchResult = company1.findPlane(12999, 55420, 1500, 65000, 5000, 2000);

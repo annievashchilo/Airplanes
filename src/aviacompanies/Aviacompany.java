@@ -37,7 +37,6 @@ public class Aviacompany {
      */
     public void addPlanesToPark(List<Plane> p) {
         planes.addAll(p);
-        System.out.println("Following planes are in park (" + getName() + "):");
     }
 
     /**
@@ -80,5 +79,17 @@ public class Aviacompany {
         }
 
         return result;
+    }
+
+    /**
+     * Method will show common capacity of planes in aviacompany
+     * @return common capacity
+     */
+    public float getCommonCapacity() {
+        float commonCapacity = 0;
+        for (Plane p : planes) {
+            commonCapacity += p.getCapacity();
+        }
+        return commonCapacity;
     }
 }
