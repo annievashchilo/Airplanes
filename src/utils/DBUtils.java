@@ -49,15 +49,20 @@ public class DBUtils {
     /**
      * make a request to database
      *
-     * @param rq     - template for request
-     * @param values - variable number of parameters to request template
+     * @param rq     - template for query
+     * @param values - parameters to query template
      */
-    public static void makeRequest(String rq, String... values) {
+    public static void makeRequest(String rq) {
         PreparedStatement preparedStatement = null;
+
         try {
             preparedStatement = c.prepareStatement(rq);
-            preparedStatement.setString(Integer.parseInt(values[0]), values[1]);
+//            preparedStatement.setInt(1, Integer.parseInt(values[0]));
+//            preparedStatement.setString(2, values[1]);
+
+            System.out.println("XXXX REQUEST:" + preparedStatement);
             preparedStatement.executeUpdate();
+            System.out.println("Query successful -> OK");
         } catch (SQLException e) {
             System.err.println("Failed to make a request");
             System.err.println("SQLException: " + e.getMessage());
@@ -88,7 +93,7 @@ public class DBUtils {
     private void loadDriver() {
         try {
             Class.forName(driverName);
-            System.out.println("OK");
+            System.out.println("Driver loaded successfully -> OK");
         } catch (ClassNotFoundException e) {
             System.err.println("Driver not found");
         }
@@ -101,7 +106,7 @@ public class DBUtils {
             c = DriverManager.getConnection(db_url, user, password);
             System.out.println("Connection to database opened");
         } catch (SQLException e) {
-            System.err.println("Failed to open connection");
+            System.err.println("Failed to open connection. url " + db_url);
             System.err.println("SQLException: \t" + e.getMessage());
         }
     }

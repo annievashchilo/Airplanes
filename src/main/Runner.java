@@ -21,18 +21,18 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        Runner runner = new Runner();
-        redirectOutput();
-        runner.createCompany("Belavia");
+//        Runner runner = new Runner();
+//        redirectOutput();
+//        runner.createCompany("Belavia");
+//
+//        runner.sortPlanes();
+//
+//        System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
+//
+//        // looking for a plane by specific parameters
+//        runner.searchPlane(12999, 55420, 1500, 65000, 5000, 20000, 100, 9999999);
 
-        runner.sortPlanes();
-
-        System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
-
-        // looking for a plane by specific parameters
-        runner.searchPlane(12999, 55420, 1500, 65000, 5000, 20000, 100, 9999999);
-
-//        postAviacompanyToDB();
+        postAviacompanyToDB();
     }
 
     private static void redirectOutput() {
@@ -48,12 +48,10 @@ public class Runner {
     }
 
     private static void postAviacompanyToDB() {
-        String sql = "INSERT INTO test.aviacompany (id, name)" +
-                "VALUES (?, ?)";
+        String sql = "DELETE FROM `test`.`aviacompany` WHERE `aviacompany`.`name` = \'razrazraz\'";
 
         DBUtils dbUtils = DBUtils.getInstance();
-        dbUtils.makeRequest(sql, "1", "abcde");
-
+        DBUtils.makeRequest(sql);
     }
 
     private void searchPlane(
