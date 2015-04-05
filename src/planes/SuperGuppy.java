@@ -6,6 +6,7 @@ public class SuperGuppy extends Plane {
     private final float volume = 42420f;         // объём
     private final float range = 14500f;          // дальность полёта
     private final float speed = 1000;            // скорость
+    private String m_name;
 
     public SuperGuppy(String name) {
         super(name);
@@ -23,5 +24,11 @@ public class SuperGuppy extends Plane {
         return range;
     }
 
-    public float getSpeed() { return speed; }
+    public float getSpeed() {
+        return speed;
+    }
+
+    public String getName() {
+        return m_name;
+    }
 }

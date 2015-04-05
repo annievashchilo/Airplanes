@@ -7,52 +7,82 @@ import planes.Plane;
 import planes.SuperGuppy;
 import utils.AirplanesUtils;
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Runner {
 
+    protected static Aviacompany company;
+
+    private static void redirectOutput() {
+        PrintStream out = null;
+        try {
+            // redirect output to the text file
+            out = new PrintStream(new FileOutputStream("output.txt"));
+            System.setErr(out);
+            System.setOut(out);
+        } catch (Exception err) {
+            System.err.println("Failed to open log file");
+        }
+    }
 
     //TODO add input from console
     public static void main(String[] args) {
-        // create planes
-        Plane p1 = new AN12("Lastochka");
-        Plane p2 = new AN12("Ptichka");
-        Plane p3 = new SuperGuppy("Ribka");
-        Plane p4 = new AN225("Mriya");
 
-        List<Plane> planes = new ArrayList<Plane>();
-        planes.add(p1);
-        planes.add(p4);
-        planes.add(p3);
-        planes.add(p2);
+        Runner runner = new Runner();
+        redirectOutput();
+        runner.createCompany("Belavia");
 
-        // create new company
-        Aviacompany company1 = new Aviacompany("belavia");
+        runner.sortPlanes();
 
-        // add created above planes to the company
-        company1.addPlanesToPark(planes);
-        System.out.println("Following planes are in park (" + company1.getName() + "):");
-        AirplanesUtils.printPlanesInfo(company1.getAviapark());
-
-        System.out.println("\nPlanes sorted by range:");
-        List<Plane> sortedPlanes = AirplanesUtils.sortPlanesByRange(company1.getAviapark());
-        AirplanesUtils.printPlanesInfo(sortedPlanes);
-
-        System.out.println("\nPlanes sorted by speed:");
-        sortedPlanes = AirplanesUtils.sortPlanesBySpeed(company1.getAviapark());
-        AirplanesUtils.printPlanesInfo(sortedPlanes);
-
-        System.out.println("\nCommon capacity of all planes of aviacompany: " + company1.getCommonCapacity());
+        System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
 
         // looking for a plane by specific parameters
-        List<Plane> searchResult = company1.findPlane(12999, 55420, 1500, 65000, 5000, 2000);
+        runner.searcPlane(12999, 55420, 1500, 65000, 5000, 20000, 100, 9999999);
+    }
+
+    private void searcPlane(
+            float minCapacity,
+            float maxCapacity,
+            float minVolume,
+            float maxVolume,
+            float minRange,
+            float maxRange,
+            float minSpeed,
+            float maxSpeed) {
         System.out.println("\nLooking for a specific plane...");
+        List<Plane> searchResult = company.findPlane(minCapacity, maxCapacity, minVolume, maxVolume, minRange, maxRange, minSpeed, maxSpeed);
         for (Plane p : searchResult) {
             System.out.print("I found:... ");
             System.out.println(p);
         }
+    }
+
+    private void sortPlanes() {
+        System.out.println("\nPlanes sorted by range:");
+        List<Plane> sortedPlanes = AirplanesUtils.sortPlanesByRange(company.getAviapark());
+        AirplanesUtils.printPlanesInfo(sortedPlanes);
+
+        System.out.println("\nPlanes sorted by speed:");
+        sortedPlanes = AirplanesUtils.sortPlanesBySpeed(company.getAviapark());
+        AirplanesUtils.printPlanesInfo(sortedPlanes);
+    }
+
+    private void createCompany(String name) {
+        //create planes
+        List<Plane> planes = new ArrayList<Plane>();
+        planes.add(new AN12("Lastochka"));
+        planes.add(new AN12("Ptichka"));
+        planes.add(new SuperGuppy("Ribka"));
+        planes.add(new AN225("Mriya"));
+
+        // create new company
+        company = new Aviacompany(name, planes);
+        System.out.println("Following planes are in park (" + company.getName() + "):");
+        AirplanesUtils.printPlanesInfo(company.getAviapark());
     }
 
 }

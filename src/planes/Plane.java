@@ -2,7 +2,6 @@ package planes;
 
 public class Plane {
 
-
     private String m_planeName;
 
     public Plane(String name) {
@@ -21,7 +20,13 @@ public class Plane {
         return 0;
     }
 
-    public float getSpeed() { return 0; }
+    public float getSpeed() {
+        return 0;
+    }
+
+    public String getName() {
+        return m_planeName;
+    }
 
     @Override
     public String toString() {
