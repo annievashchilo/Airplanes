@@ -6,9 +6,12 @@ import planes.AN225;
 import planes.Plane;
 import planes.SuperGuppy;
 import utils.AirplanesUtils;
+import utils.DBUtils;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +19,23 @@ import java.util.List;
 public class Runner {
 
     protected static Aviacompany company;
+
+
+    public static void main(String[] args) {
+
+        Runner runner = new Runner();
+//        redirectOutput();
+//        runner.createCompany("Belavia");
+//
+//        runner.sortPlanes();
+//
+//        System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
+//
+//        // looking for a plane by specific parameters
+//        runner.searchPlane(12999, 55420, 1500, 65000, 5000, 20000, 100, 9999999);
+
+        postAviacompanyToDB();
+    }
 
     private static void redirectOutput() {
         PrintStream out = null;
@@ -29,22 +49,21 @@ public class Runner {
         }
     }
 
-    //TODO add input from console
-    public static void main(String[] args) {
+    private static void postAviacompanyToDB() {
+        String sql = "INSERT INTO test.aviacompany (name)" +
+                "VALUES (?)";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement.setString(1, "testcompany");
+            DBUtils.makeRequest(preparedStatement);
+        } catch (SQLException e) {
+            System.err.println("Failed to create aviacompany");
+            System.err.println("SQLException:" + e.getMessage());
+        }
 
-        Runner runner = new Runner();
-        redirectOutput();
-        runner.createCompany("Belavia");
-
-        runner.sortPlanes();
-
-        System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
-
-        // looking for a plane by specific parameters
-        runner.searcPlane(12999, 55420, 1500, 65000, 5000, 20000, 100, 9999999);
     }
 
-    private void searcPlane(
+    private void searchPlane(
             float minCapacity,
             float maxCapacity,
             float minVolume,
@@ -54,7 +73,15 @@ public class Runner {
             float minSpeed,
             float maxSpeed) {
         System.out.println("\nLooking for a specific plane...");
-        List<Plane> searchResult = company.findPlane(minCapacity, maxCapacity, minVolume, maxVolume, minRange, maxRange, minSpeed, maxSpeed);
+        List<Plane> searchResult = company.findPlane(
+                minCapacity,
+                maxCapacity,
+                minVolume,
+                maxVolume,
+                minRange,
+                maxRange,
+                minSpeed,
+                maxSpeed);
         for (Plane p : searchResult) {
             System.out.print("I found:... ");
             System.out.println(p);
