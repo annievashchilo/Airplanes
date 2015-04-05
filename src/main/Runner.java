@@ -10,8 +10,6 @@ import utils.DBUtils;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,16 +48,11 @@ public class Runner {
     }
 
     private static void postAviacompanyToDB() {
-        String sql = "INSERT INTO test.aviacompany (name)" +
-                "VALUES (?)";
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement.setString(1, "testcompany");
-            DBUtils.makeRequest(preparedStatement);
-        } catch (SQLException e) {
-            System.err.println("Failed to create aviacompany");
-            System.err.println("SQLException:" + e.getMessage());
-        }
+        String sql = "INSERT INTO test.aviacompany (id, name)" +
+                "VALUES (?, ?)";
+
+        DBUtils dbUtils = DBUtils.getInstance();
+        dbUtils.makeRequest(sql, "1", "abcde");
 
     }
 

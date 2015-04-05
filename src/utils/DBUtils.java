@@ -15,24 +15,58 @@ public class DBUtils {
 
     private final String db_props = "database.properties";
 
+    private static volatile DBUtils instance;
+
     private String user;
     private String password;
     private String driverName;
     private String db_url;
 
-    private Connection c;
+    private static Connection c;
 
-    public static void makeRequest(PreparedStatement rq) {
 
-        try {
-
-            rq.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    /**
+     * create only 1 instance of DBUtils, to open only 1 connection to database
+     * lazy initialization
+     * high performance
+     *
+     * @return localInstance
+     */
+    public static DBUtils getInstance() {
+        DBUtils localInstance = instance;
+        if (localInstance == null) {
+            synchronized (DBUtils.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new DBUtils();
+                    instance.openDBConnection();
+                }
+            }
         }
-
+        return localInstance;
     }
 
+    /**
+     * make a request to database
+     *
+     * @param rq     - template for request
+     * @param values - variable number of parameters to request template
+     */
+    public static void makeRequest(String rq, String... values) {
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = c.prepareStatement(rq);
+            preparedStatement.setString(Integer.parseInt(values[0]), values[1]);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Failed to make a request");
+            System.err.println("SQLException: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Read properties from file
+     */
     private void readProperties() {
         Properties props = new Properties();
 
