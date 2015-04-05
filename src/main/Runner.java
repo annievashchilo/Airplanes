@@ -22,17 +22,17 @@ public class Runner {
     public static void main(String[] args) {
 
         Runner runner = new Runner();
-//        redirectOutput();
-//        runner.createCompany("Belavia");
-//
-//        runner.sortPlanes();
-//
-//        System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
-//
-//        // looking for a plane by specific parameters
-//        runner.searchPlane(12999, 55420, 1500, 65000, 5000, 20000, 100, 9999999);
+        redirectOutput();
+        runner.createCompany("Belavia");
 
-        postAviacompanyToDB();
+        runner.sortPlanes();
+
+        System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
+
+        // looking for a plane by specific parameters
+        runner.searchPlane(12999, 55420, 1500, 65000, 5000, 20000, 100, 9999999);
+
+//        postAviacompanyToDB();
     }
 
     private static void redirectOutput() {
