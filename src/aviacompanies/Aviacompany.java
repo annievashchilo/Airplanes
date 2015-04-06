@@ -8,9 +8,10 @@ import java.util.List;
 public class Aviacompany {
 
     private String m_companyName;
-    private List<Plane> m_planes = new ArrayList<Plane>();
+    private List<Plane> m_planes;
 
     public Aviacompany(String companyName) {
+        m_planes = new ArrayList<Plane>();
         m_companyName = companyName;
     }
 
@@ -87,7 +88,6 @@ public class Aviacompany {
                 result.add(p);
             }
         }
-
         return result;
     }
 

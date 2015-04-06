@@ -4,6 +4,7 @@ import planes.Plane;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class AirplanesUtils {
@@ -27,22 +28,25 @@ public class AirplanesUtils {
      * @return list of sorted planes
      */
     public static List<Plane> sortPlanesByRange(List<Plane> planes) {
-        List<Plane> sorted = new ArrayList<Plane>();
-        sorted.addAll(planes);
-        Collections.sort(sorted, new RangeComparator());
-        return sorted;
+        Collections.sort(planes, new Comparator<Plane>() {
+            public int compare(Plane plane, Plane t1) {
+                return plane.getRange() < t1.getRange() ? -1 : plane.getRange() == t1.getRange() ? 0 : 1;
+            }});
+        return planes;
     }
 
     /**
      * Method sorts all airplanes in company by speed
+     *
      * @param planes all airplanes
      * @return list of sorted airplanes
      */
     public static List<Plane> sortPlanesBySpeed(List<Plane> planes) {
-        List<Plane> sorted = new ArrayList<Plane>();
-        sorted.addAll(planes);
-        Collections.sort(sorted, new SpeedComparator());
-        return sorted;
+        Collections.sort(planes, new Comparator<Plane>() {
+            public int compare(Plane plane, Plane t1) {
+                return plane.getSpeed() < t1.getSpeed() ? -1 : plane.getSpeed() == t1.getSpeed() ? 0 : 1;
+            }});
+        return planes;
     }
 
 }
