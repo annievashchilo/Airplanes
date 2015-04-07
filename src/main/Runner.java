@@ -37,6 +37,8 @@ public class Runner {
 
     private static void redirectOutput() {
         PrintStream out = null;
+        System.out.println("Once the program finished," +
+                " you can find the results in output.txt file");
         try {
             // redirect output to the text file
             out = new PrintStream(new FileOutputStream("output.txt"));
