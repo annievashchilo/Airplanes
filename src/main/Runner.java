@@ -7,6 +7,7 @@ import planes.Plane;
 import planes.SuperGuppy;
 import utils.AirplanesUtils;
 import utils.DBUtils;
+import utils.DOMXmlParser;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -18,8 +19,8 @@ public class Runner {
 
     protected static Aviacompany company;
 
-
     public static void main(String[] args) {
+
 
         Runner runner = new Runner();
         redirectOutput();
@@ -30,9 +31,12 @@ public class Runner {
         System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
 
         // looking for a plane by specific parameters
-        runner.searchPlane(12999, 55420, 1500, 65000, 5000, 20000, 100, 9999999);
+        runner.searchPlane(12999, 55420, 1500, 65000, 500, 1000, 100, 9999999);
 
 //        postAviacompanyToDB();
+
+        DOMXmlParser xmlParser = new DOMXmlParser("planes.xml");
+        xmlParser.parse();
     }
 
     private static void redirectOutput() {
@@ -50,10 +54,11 @@ public class Runner {
     }
 
     private static void postAviacompanyToDB() {
-        String sql = "DELETE FROM `test`.`aviacompany` WHERE `aviacompany`.`name` = \'razrazraz\'";
+
+        String sql = "DELETE FROM `test`.`aviacompany` WHERE `aviacompany`.`name` = ?";
 
         DBUtils dbUtils = DBUtils.getInstance();
-        DBUtils.makeRequest(sql);
+        DBUtils.executeRequest(sql);
     }
 
     private void searchPlane(
@@ -66,7 +71,8 @@ public class Runner {
             float minSpeed,
             float maxSpeed) {
         System.out.println("\nLooking for a specific plane...");
-        List<Plane> searchResult = company.findPlane(
+        List<Plane> searchResult = null;
+        searchResult = company.findPlane(
                 minCapacity,
                 maxCapacity,
                 minVolume,

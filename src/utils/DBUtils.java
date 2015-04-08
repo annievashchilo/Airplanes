@@ -8,22 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- * Created by Anny on 05.04.15.
- */
+
 public class DBUtils {
 
-    private final String db_props = "database.properties";
-
     private static volatile DBUtils instance;
-
+    private static Connection c;
+    private final String db_props = "database.properties";
     private String user;
     private String password;
     private String driverName;
     private String db_url;
-
-    private static Connection c;
-
 
     /**
      * create only 1 instance of DBUtils, to open only 1 connection to database
@@ -50,9 +44,8 @@ public class DBUtils {
      * make a request to database
      *
      * @param rq     - template for query
-     * @param values - parameters to query template
      */
-    public static void makeRequest(String rq) {
+    public static void executeRequest(String rq) {
         PreparedStatement preparedStatement = null;
 
         try {
@@ -80,7 +73,7 @@ public class DBUtils {
             props.load(file_in);
             file_in.close();
         } catch (IOException e) {
-            System.out.println("Unable to load properties");
+            System.err.println("Unable to load properties");
             return;
         }
 
