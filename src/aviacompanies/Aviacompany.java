@@ -1,5 +1,6 @@
 package aviacompanies;
 
+import exceptions.PlaneNotFoundException;
 import planes.Plane;
 
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public class Aviacompany {
             float maxRange,
             float minSpeed,
             float maxSpeed
-    ) {
+    ) throws PlaneNotFoundException {
         List<Plane> result = new ArrayList<Plane>();
 
         for (Plane p : m_planes) {
@@ -86,6 +87,8 @@ public class Aviacompany {
                     || (p.getRange() >= minRange && p.getRange() <= maxRange)
                     || (p.getSpeed() >= minSpeed && p.getSpeed() <= maxSpeed)) {
                 result.add(p);
+            } else {
+                throw new PlaneNotFoundException("Requested plane was not found");
             }
         }
         return result;

@@ -1,6 +1,7 @@
 package main;
 
 import aviacompanies.Aviacompany;
+import exceptions.PlaneNotFoundException;
 import planes.AN12;
 import planes.AN225;
 import planes.Plane;
@@ -11,6 +12,8 @@ import utils.DOMXmlParser;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +35,14 @@ public class Runner {
 
         // looking for a plane by specific parameters
         runner.searchPlane(12999, 55420, 1500, 65000, 500, 1000, 100, 9999999);
+        runner.searchPlane(0, 0, 0, 0, 0, 0, 0, 0);
 
 //        postAviacompanyToDB();
 
         DOMXmlParser xmlParser = new DOMXmlParser("planes.xml");
         xmlParser.parse();
+
+        getAllAirplanesFromDB();
     }
 
     private static void redirectOutput() {
@@ -53,12 +59,31 @@ public class Runner {
         }
     }
 
-    private static void postAviacompanyToDB() {
+    private static void getAllAirplanesFromDB() {
 
-        String sql = "DELETE FROM `test`.`aviacompany` WHERE `aviacompany`.`name` = ?";
+        String stmt = "SELECT * FROM airplanes";
 
         DBUtils dbUtils = DBUtils.getInstance();
-        DBUtils.executeRequest(sql);
+        ResultSet rs = DBUtils.executeRequest(stmt);
+
+        try {
+            while (rs.next()) {
+                System.out.println(rs.getString(
+                        "plane_name") +
+                        ":\n\tid:" +
+                        rs.getInt("plane_id") +
+                        ":\n\trange:" +
+                        rs.getInt("plane_range") +
+                        "\n\tcapacity:" +
+                        rs.getInt("plane_capacity") +
+                        "\n\tvolume:" +
+                        rs.getInt("plane_volume") +
+                        "\n\tspeed:" +
+                        rs.getInt("plane_speed"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void searchPlane(
@@ -72,15 +97,19 @@ public class Runner {
             float maxSpeed) {
         System.out.println("\nLooking for a specific plane...");
         List<Plane> searchResult = null;
-        searchResult = company.findPlane(
-                minCapacity,
-                maxCapacity,
-                minVolume,
-                maxVolume,
-                minRange,
-                maxRange,
-                minSpeed,
-                maxSpeed);
+        try {
+            searchResult = company.findPlane(
+                    minCapacity,
+                    maxCapacity,
+                    minVolume,
+                    maxVolume,
+                    minRange,
+                    maxRange,
+                    minSpeed,
+                    maxSpeed);
+        } catch (PlaneNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
         for (Plane p : searchResult) {
             System.out.print("I found:... ");
             System.out.println(p);

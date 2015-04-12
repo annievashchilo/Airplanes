@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aviacompany name="Lufthansa">
     <plane id="1">
-        <name>Boing 737</name>
+        <name>Boeing 737</name>
         <capacity>200</capacity>
         <speed>400</speed>
         <volume>150</volume>

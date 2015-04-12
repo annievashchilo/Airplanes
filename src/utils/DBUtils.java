@@ -2,10 +2,7 @@ package utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 
@@ -45,21 +42,21 @@ public class DBUtils {
      *
      * @param rq     - template for query
      */
-    public static void executeRequest(String rq) {
+    public static ResultSet executeRequest(String rq) {
         PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
 
         try {
             preparedStatement = c.prepareStatement(rq);
-//            preparedStatement.setInt(1, Integer.parseInt(values[0]));
-//            preparedStatement.setString(2, values[1]);
 
             System.out.println("XXXX REQUEST:" + preparedStatement);
-            preparedStatement.executeUpdate();
+            rs = preparedStatement.executeQuery();
             System.out.println("Query successful -> OK");
         } catch (SQLException e) {
             System.err.println("Failed to make a request");
             System.err.println("SQLException: " + e.getMessage());
         }
+        return rs;
     }
 
     /**
