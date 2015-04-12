@@ -83,7 +83,7 @@ public class DBUtils {
     private void loadDriver() {
         try {
             Class.forName(driverName);
-            System.out.println("Driver loaded successfully -> OK");
+            System.out.println("\nDriver loaded successfully -> OK");
         } catch (ClassNotFoundException e) {
             System.err.println("Driver not found");
         }

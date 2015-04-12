@@ -107,13 +107,14 @@ public class Runner {
                     maxRange,
                     minSpeed,
                     maxSpeed);
+            for (Plane p : searchResult) {
+                System.out.print("I found:... ");
+                System.out.println(p);
+            }
         } catch (PlaneNotFoundException e) {
             System.err.println(e.getMessage());
         }
-        for (Plane p : searchResult) {
-            System.out.print("I found:... ");
-            System.out.println(p);
-        }
+
     }
 
     private void sortPlanes() {
