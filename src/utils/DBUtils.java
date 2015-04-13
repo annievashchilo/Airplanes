@@ -40,7 +40,7 @@ public class DBUtils {
     /**
      * make a request to database
      *
-     * @param rq     - template for query
+     * @param rq - template for query
      */
     public static ResultSet executeRequest(String rq) {
         PreparedStatement preparedStatement = null;

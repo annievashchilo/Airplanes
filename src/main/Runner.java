@@ -42,6 +42,7 @@ public class Runner {
         DOMXmlParser xmlParser = new DOMXmlParser("planes.xml");
         xmlParser.parse();
 
+        System.out.println();
         getAllAirplanesFromDB();
     }
 
@@ -68,17 +69,18 @@ public class Runner {
 
         try {
             while (rs.next()) {
+                System.out.println();
                 System.out.println(rs.getString(
                         "plane_name") +
-                        ":\n\tid:" +
+                        "\nid:            " +
                         rs.getInt("plane_id") +
-                        ":\n\trange:" +
+                        "\nrange:         " +
                         rs.getInt("plane_range") +
-                        "\n\tcapacity:" +
+                        "\ncapacity:      " +
                         rs.getInt("plane_capacity") +
-                        "\n\tvolume:" +
+                        "\nvolume:        " +
                         rs.getInt("plane_volume") +
-                        "\n\tspeed:" +
+                        "\nspeed:         " +
                         rs.getInt("plane_speed"));
             }
         } catch (SQLException e) {
@@ -108,7 +110,7 @@ public class Runner {
                     minSpeed,
                     maxSpeed);
             for (Plane p : searchResult) {
-                System.out.print("I found:... ");
+                System.out.print("Plane found:... ");
                 System.out.println(p);
             }
         } catch (PlaneNotFoundException e) {

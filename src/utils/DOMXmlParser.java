@@ -43,12 +43,12 @@ public class DOMXmlParser {
 
                     Element eElement = (Element) nNode;
 
-                    System.out.println("Airplane id         : " + eElement.getAttribute("id"));
-                    System.out.println("Airplane name       : " + eElement.getElementsByTagName("name").item(0).getTextContent());
-                    System.out.println("Airplane capacity   : " + eElement.getElementsByTagName("capacity").item(0).getTextContent());
-                    System.out.println("Airplane range      : " + eElement.getElementsByTagName("range").item(0).getTextContent());
-                    System.out.println("Airplane volume     : " + eElement.getElementsByTagName("volume").item(0).getTextContent());
-                    System.out.println("Airplane speed      : " + eElement.getElementsByTagName("speed").item(0).getTextContent());
+                    System.out.println("Airplane id:          " + eElement.getAttribute("id"));
+                    System.out.println("Airplane name:        " + eElement.getElementsByTagName("name").item(0).getTextContent());
+                    System.out.println("Airplane capacity:    " + eElement.getElementsByTagName("capacity").item(0).getTextContent());
+                    System.out.println("Airplane range:       " + eElement.getElementsByTagName("range").item(0).getTextContent());
+                    System.out.println("Airplane volume:      " + eElement.getElementsByTagName("volume").item(0).getTextContent());
+                    System.out.println("Airplane speed:       " + eElement.getElementsByTagName("speed").item(0).getTextContent());
                 }
             }
         } catch (Exception e) {
