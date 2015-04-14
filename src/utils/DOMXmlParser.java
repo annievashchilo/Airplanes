@@ -1,6 +1,7 @@
 package utils;
 
 
+import exceptions.CompanyNotFoundException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -10,7 +11,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-public class DOMXmlParser extends AbstractDataSrcUtils {
+public class DOMXmlParser implements DataSrcUtils {
 
     public String m_fileToParse = "";
 
@@ -18,7 +19,7 @@ public class DOMXmlParser extends AbstractDataSrcUtils {
         m_fileToParse = fileToParse;
     }
 
-    public void parse() {
+    public void getAirplanes() {
         System.out.println("\nStart parsing xml file with airplanes");
         try {
             File xmlFile = new File(m_fileToParse);
@@ -57,8 +58,27 @@ public class DOMXmlParser extends AbstractDataSrcUtils {
 
     }
 
-    @Override
-    void doNothing() {
+    public String getAviacompany(String companyName) {
+        System.out.println("\nLooking for a company " + companyName + " in xml file");
+        String company = null;
+        try {
+            File xmlFile = new File(m_fileToParse);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(xmlFile);
 
+            doc.getDocumentElement().normalize();
+
+            company = doc.getDocumentElement().getAttribute("name");
+            if (!company.equalsIgnoreCase(companyName))
+                throw new CompanyNotFoundException("Requested company was not found");
+            System.out.println("Company " + company + " was found");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return company;
     }
+
 }

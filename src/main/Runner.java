@@ -1,6 +1,7 @@
 package main;
 
 import aviacompanies.Aviacompany;
+import exceptions.CompanyNotFoundException;
 import exceptions.PlaneNotFoundException;
 import planes.AN12;
 import planes.AN225;
@@ -12,8 +13,6 @@ import utils.DOMXmlParser;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +39,18 @@ public class Runner {
 //        postAviacompanyToDB();
 
         DOMXmlParser xmlParser = new DOMXmlParser("planes.xml");
-        xmlParser.parse();
+        xmlParser.getAirplanes();
+
 
         System.out.println();
-        getAllAirplanesFromDB();
+        DBUtils.getInstance().getAirplanes();
+
+        try {
+            DBUtils.getInstance().getAviacompany(company.getName());
+            xmlParser.getAviacompany(company.getName());
+        } catch (CompanyNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private static void redirectOutput() {
@@ -57,34 +64,6 @@ public class Runner {
             System.setOut(out);
         } catch (Exception err) {
             System.err.println("Failed to open log file");
-        }
-    }
-
-    private static void getAllAirplanesFromDB() {
-
-        String stmt = "SELECT * FROM airplanes";
-
-        DBUtils dbUtils = DBUtils.getInstance();
-        ResultSet rs = DBUtils.executeRequest(stmt);
-
-        try {
-            while (rs.next()) {
-                System.out.println();
-                System.out.println(rs.getString(
-                        "plane_name") +
-                        "\nid:            " +
-                        rs.getInt("plane_id") +
-                        "\nrange:         " +
-                        rs.getInt("plane_range") +
-                        "\ncapacity:      " +
-                        rs.getInt("plane_capacity") +
-                        "\nvolume:        " +
-                        rs.getInt("plane_volume") +
-                        "\nspeed:         " +
-                        rs.getInt("plane_speed"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

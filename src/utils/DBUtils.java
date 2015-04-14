@@ -1,5 +1,6 @@
 package utils;
 
+import exceptions.CompanyNotFoundException;
 import exceptions.DBNotFoundException;
 
 import java.io.FileInputStream;
@@ -8,7 +9,7 @@ import java.sql.*;
 import java.util.Properties;
 
 
-public class DBUtils extends AbstractDataSrcUtils {
+public class DBUtils implements DataSrcUtils {
 
     private static volatile DBUtils instance;
     private static Connection c;
@@ -108,8 +109,55 @@ public class DBUtils extends AbstractDataSrcUtils {
         }
     }
 
-    @Override
-    void doNothing() {
+    public String getAviacompany(String companyName) throws CompanyNotFoundException {
+        System.out.println("\nLooking for " + companyName + " in database");
 
+        String stmt = "SELECT `company_name` FROM `aviacompanies` WHERE `company_name` = '" + companyName + "'";
+        String company = null;
+        ResultSet rs = DBUtils.getInstance().executeRequest(stmt);
+
+        try {
+            while (rs.next()) {
+                if (rs.wasNull()) {
+                    throw new CompanyNotFoundException();
+                } else {
+                    System.out.println();
+                    company = rs.getString("company_name");
+                    System.out.println("Company " + company + " was found in DB");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return company;
+    }
+
+
+    public void getAirplanes() {
+        String stmt = "SELECT * FROM airplanes";
+
+        DBUtils dbUtils = DBUtils.getInstance();
+        ResultSet rs = DBUtils.executeRequest(stmt);
+
+        try {
+            while (rs.next()) {
+                System.out.println();
+                System.out.println(rs.getString(
+                        "plane_name") +
+                        "\nid:            " +
+                        rs.getInt("plane_id") +
+                        "\nrange:         " +
+                        rs.getInt("plane_range") +
+                        "\ncapacity:      " +
+                        rs.getInt("plane_capacity") +
+                        "\nvolume:        " +
+                        rs.getInt("plane_volume") +
+                        "\nspeed:         " +
+                        rs.getInt("plane_speed"));
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
