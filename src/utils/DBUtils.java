@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.Properties;
 
 
-public class DBUtils {
+public class DBUtils extends AbstractDataSrcUtils {
 
     private static volatile DBUtils instance;
     private static Connection c;
@@ -106,5 +106,10 @@ public class DBUtils {
             System.err.println("SQLException: \t" + e.getMessage());
             throw new DBNotFoundException();
         }
+    }
+
+    @Override
+    void doNothing() {
+
     }
 }

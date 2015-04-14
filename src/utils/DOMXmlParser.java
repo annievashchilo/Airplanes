@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-public class DOMXmlParser {
+public class DOMXmlParser extends AbstractDataSrcUtils {
 
     public String m_fileToParse = "";
 
@@ -54,6 +54,11 @@ public class DOMXmlParser {
         } catch (Exception e) {
             System.err.println("Failed to parse the filefile" + e.getMessage());
         }
+
+    }
+
+    @Override
+    void doNothing() {
 
     }
 }

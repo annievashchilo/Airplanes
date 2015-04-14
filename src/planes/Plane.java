@@ -1,6 +1,6 @@
 package planes;
 
-public class Plane {
+public class Plane extends AbstractPlane {
 
     private String m_planeName;
 
