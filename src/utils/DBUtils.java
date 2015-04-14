@@ -1,5 +1,7 @@
 package utils;
 
+import exceptions.DBNotFoundException;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -30,7 +32,11 @@ public class DBUtils {
                 localInstance = instance;
                 if (localInstance == null) {
                     instance = localInstance = new DBUtils();
-                    instance.openDBConnection();
+                    try {
+                        instance.openDBConnection();
+                    } catch (DBNotFoundException e) {
+                        System.err.println("Requested database not found " + e.getMessage());
+                    }
                 }
             }
         }
@@ -89,7 +95,7 @@ public class DBUtils {
         }
     }
 
-    private void openDBConnection() {
+    private void openDBConnection() throws DBNotFoundException {
         readProperties();
         loadDriver();
         try {
@@ -98,6 +104,7 @@ public class DBUtils {
         } catch (SQLException e) {
             System.err.println("Failed to open connection. url " + db_url);
             System.err.println("SQLException: \t" + e.getMessage());
+            throw new DBNotFoundException();
         }
     }
 }

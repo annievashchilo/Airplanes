@@ -2,7 +2,6 @@ package utils;
 
 import planes.Plane;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -31,7 +30,8 @@ public class AirplanesUtils {
         Collections.sort(planes, new Comparator<Plane>() {
             public int compare(Plane plane, Plane t1) {
                 return plane.getRange() < t1.getRange() ? -1 : plane.getRange() == t1.getRange() ? 0 : 1;
-            }});
+            }
+        });
         return planes;
     }
 
@@ -45,7 +45,8 @@ public class AirplanesUtils {
         Collections.sort(planes, new Comparator<Plane>() {
             public int compare(Plane plane, Plane t1) {
                 return plane.getSpeed() < t1.getSpeed() ? -1 : plane.getSpeed() == t1.getSpeed() ? 0 : 1;
-            }});
+            }
+        });
         return planes;
     }
 
