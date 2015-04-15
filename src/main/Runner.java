@@ -10,6 +10,7 @@ import planes.SuperGuppy;
 import utils.AirplanesUtils;
 import utils.DBUtils;
 import utils.DOMXmlParser;
+import utils.DataSrcUtils;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -38,16 +39,18 @@ public class Runner {
 
 //        postAviacompanyToDB();
 
-        DOMXmlParser xmlParser = new DOMXmlParser("planes.xml");
-        xmlParser.getAirplanes();
+
+        DataSrcUtils xmlUtils = new DOMXmlParser("planes.xml");
+        DataSrcUtils dbUtils = DBUtils.getInstance();
+        xmlUtils.getAirplanes();
 
 
         System.out.println();
-        DBUtils.getInstance().getAirplanes();
+        dbUtils.getAirplanes();
 
         try {
-            DBUtils.getInstance().getAviacompany(company.getName());
-            xmlParser.getAviacompany(company.getName());
+            dbUtils.getAviacompany(company.getName());
+            xmlUtils.getAviacompany(company.getName());
         } catch (CompanyNotFoundException e) {
             System.err.println(e.getMessage());
         }

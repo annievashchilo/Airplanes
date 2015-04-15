@@ -27,6 +27,9 @@ Plane found:... SuperGuppy 'Ribka': v=2000.00, c=42420.00, r=14500.00, s=1000.00
 Looking for a specific plane...
 Requested plane was not found
 
+Driver loaded successfully -> OK
+Connection to database opened
+
 Start parsing xml file with airplanes
 
 Parsing planes in company :Lufthansa
@@ -55,9 +58,6 @@ Airplane range:       100000
 Airplane volume:      700
 Airplane speed:       1200
 
-
-Driver loaded successfully -> OK
-Connection to database opened
 XXXX REQUEST:com.mysql.jdbc.JDBC4PreparedStatement@1fdcb677: SELECT * FROM airplanes
 Query successful -> OK
 
@@ -139,8 +139,8 @@ Company Belavia was found in DB
 
 Looking for a company Belavia in xml file
 exceptions.CompanyNotFoundException: Requested company was not found
-	at utils.DOMXmlParser.getAviacompany(DOMXmlParser.java:73)
-	at main.Runner.main(Runner.java:50)
+	at utils.DOMXmlParser.getAviacompany(DOMXmlParser.java:74)
+	at main.Runner.main(Runner.java:53)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
