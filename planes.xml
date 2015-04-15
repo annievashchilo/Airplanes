@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aviacompany name="Lufthansa">
+<aviacompany name="Belavia">
     <plane id="1">
         <name>Boeing 737</name>
         <capacity>200</capacity>

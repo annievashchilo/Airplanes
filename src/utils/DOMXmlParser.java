@@ -6,10 +6,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
 
 public class DOMXmlParser implements DataSrcUtils {
 
@@ -22,13 +25,7 @@ public class DOMXmlParser implements DataSrcUtils {
     public void getAirplanes() {
         System.out.println("\nStart parsing xml file with airplanes");
         try {
-            File xmlFile = new File(m_fileToParse);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(xmlFile);
-
-            doc.getDocumentElement().normalize();
-
+            Document doc = parseXML();
 
             System.out.println("\nParsing planes in company :" + doc.getDocumentElement().getAttribute("name"));
 
@@ -62,12 +59,7 @@ public class DOMXmlParser implements DataSrcUtils {
         System.out.println("\nLooking for a company " + companyName + " in xml file");
         String company = null;
         try {
-            File xmlFile = new File(m_fileToParse);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(xmlFile);
-
-            doc.getDocumentElement().normalize();
+            Document doc = parseXML();
 
             company = doc.getDocumentElement().getAttribute("name");
             if (!company.equalsIgnoreCase(companyName))
@@ -79,6 +71,25 @@ public class DOMXmlParser implements DataSrcUtils {
         }
 
         return company;
+    }
+
+    protected Document parseXML() {
+        File xmlFile = new File(m_fileToParse);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = null;
+        Document doc = null;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+            doc = dBuilder.parse(xmlFile);
+            doc.getDocumentElement().normalize();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return doc;
     }
 
 }
