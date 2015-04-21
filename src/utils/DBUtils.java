@@ -13,6 +13,8 @@ public class DBUtils implements DataSrcUtils {
 
     private static volatile DBUtils instance;
     private static Connection c;
+    private static ResultSet rs;
+    private static PreparedStatement preparedStatement;
     private final String db_props = "database.properties";
     private String user;
     private String password;
@@ -50,8 +52,6 @@ public class DBUtils implements DataSrcUtils {
      * @param rq - template for query
      */
     public static ResultSet executeRequest(String rq) {
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
 
         try {
             preparedStatement = c.prepareStatement(rq);
@@ -109,6 +109,7 @@ public class DBUtils implements DataSrcUtils {
         }
     }
 
+
     public String getAviacompany(String companyName) throws CompanyNotFoundException {
         System.out.println("\nLooking for " + companyName + " in database");
 
@@ -160,4 +161,6 @@ public class DBUtils implements DataSrcUtils {
             System.err.println(e.getMessage());
         }
     }
+
+
 }

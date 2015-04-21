@@ -46,10 +46,10 @@ public class Runner {
 
 
         System.out.println();
-        dbUtils.getAirplanes();
+        //dbUtils.getAirplanes();
 
         try {
-            dbUtils.getAviacompany(company.getName());
+            //dbUtils.getAviacompany(company.getName());
             xmlUtils.getAviacompany(company.getName());
         } catch (CompanyNotFoundException e) {
             System.err.println(e.getMessage());
@@ -111,7 +111,7 @@ public class Runner {
         AirplanesUtils.printPlanesInfo(sortedPlanes);
     }
 
-    private void createCompany(String name) {
+    public void createCompany(String name) {
         //create planes
         List<Plane> planes = new ArrayList<Plane>();
         planes.add(new AN12("Lastochka"));
