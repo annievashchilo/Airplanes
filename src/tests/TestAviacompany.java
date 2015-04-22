@@ -1,6 +1,5 @@
 package tests;
 
-import main.Runner;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -9,7 +8,6 @@ public class TestAviacompany extends BaseTest {
     @BeforeClass(alwaysRun = true)
     private void setUp() {
 //        db = DBUtils.getInstance();
-        Runner runner = new Runner();
         createCompany("Belavia");
     }
 
