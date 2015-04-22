@@ -1,16 +1,24 @@
 package tests;
 
+import aviacompanies.Aviacompany;
 import main.Runner;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import planes.AN12;
+import planes.AN225;
+import planes.Plane;
+import planes.SuperGuppy;
+
 
 public class TestAviacompany extends BaseTest {
+
+    protected Aviacompany m_aviacompany;
 
     @BeforeClass(alwaysRun = true)
     private void setUp() {
 //        db = DBUtils.getInstance();
         Runner runner = new Runner();
-        createCompany("Belavia");
+        m_aviacompany = createCompany("Belavia");
     }
 
     @BeforeMethod
@@ -36,10 +44,38 @@ public class TestAviacompany extends BaseTest {
     @Parameters({"companyName"})
     @Test(groups = {"aviacompany"})
     public void testCompanyNotCreated(String companyName) {
-        logger.info("Verify that company with specified name was created");
+        logger.info("Verify that company with specified name was NOT created");
 
         Assert.assertFalse(company.getName().equals(companyName),
-                "Company was not created - > FAIL");
-        logger.info("Company was created -> OK");
+                "Company was created - > FAIL");
+        logger.info("Company was not created -> OK");
+    }
+
+    @Test(groups = {"aviacompany"})
+    public void testCommonCapacity() {
+        logger.info("Verify common capacity in aviacompany");
+
+        float capacitySumm = 0;
+        capacitySumm += new AN12("An-12").getCapacity();
+        capacitySumm += new AN225("An-225").getCapacity();
+        capacitySumm += new SuperGuppy("Super Guppy").getCapacity();
+
+        Assert.assertEquals(m_aviacompany.getCommonCapacity(), capacitySumm,
+                "Capacities are not equal as expected -> FAIL");
+        logger.info("Expected and equal capacity are equal -> OK");
+    }
+
+    @Parameters({"planeName"})
+    @Test(groups = {"aviacompany"})
+    public void testSearchPlane(String planeName) {
+        logger.info("Verify that expected plane belongs to aviacompany");
+
+        for (Plane plane : m_aviacompany.getAviapark()) {
+            if (plane.getName().equals(planeName)) {
+                logger.info("Plane '" + planeName + "' was successfully found -> OK");
+                return;
+            }
+            logger.error("Expected plane '" + planeName + "' was not found in aviapark -> FAIL");
+        }
     }
 }
