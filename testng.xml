@@ -1,20 +1,23 @@
 <suite>
     <test name="TestAviacompany">
-        <groups>
-            <run>
-                <include name="aviacompany"/>
-                <parameter name="expectedName" value="Belavia"/>
-                <parameter name="companyName" value="Lufthansa"/>
-            </run>
-        </groups>
+        <!--<groups>-->
+        <!--<run>-->
+        <!--<include name="aviacompany"/>-->
+        <!--<parameter name="expectedName" value="Belavia"/>-->
+        <!--<parameter name="companyName" value="Lufthansa"/>-->
+        <!--</run>-->
+        <!--</groups>-->
         <classes>
             <class name="tests.TestAviacompany"/>
             <methods>
                 <include name="testCompanyCreated"/>
                 <include name="testCompanyNotCreated"/>
+                <include name="testCommonCapacity"/>
+                <include name="testSearchPlane"/>
             </methods>
-            <!--<parameter name="expectedName" value="Belavia"/>-->
-            <!--<parameter name="companyName" value="Lufthansa"/>-->
+            <parameter name="expectedName" value="Belavia"/>
+            <parameter name="companyName" value="Lufthansa"/>
+            <parameter name="planeName" value="Ribka"/>
         </classes>
     </test>
 </suite>

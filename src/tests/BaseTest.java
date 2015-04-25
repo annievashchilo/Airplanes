@@ -12,9 +12,6 @@ import utils.DBUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Anny on 21.04.15.
- */
 public class BaseTest {
 
     public final static Logger logger = Logger.getLogger(BaseTest.class);
@@ -24,18 +21,32 @@ public class BaseTest {
     public Aviacompany company;
 
 
-    public void createCompany(String name) {
-        //create planes
-        List<Plane> planes = new ArrayList<Plane>();
+    /**
+     * create company
+     *
+     * @param name - name of aviacompany
+     * @return representation of aviacompany
+     */
+    public Aviacompany createCompany(String name) {
+        planes = new ArrayList<Plane>();
+        company = new Aviacompany(name, constructPlanes());
+        System.out.println("Following planes are in park (" + company.getName() + "):");
+        AirplanesUtils.printPlanesInfo(company.getAviapark());
+
+        return company;
+    }
+
+    /**
+     * create new planes
+     *
+     * @return list of planes
+     */
+    private List<Plane> constructPlanes() {
         planes.add(new AN12("Lastochka"));
-        planes.add(new AN12("Ptichka"));
         planes.add(new SuperGuppy("Ribka"));
         planes.add(new AN225("Mriya"));
 
-        // create new company
-        company = new Aviacompany(name, planes);
-        System.out.println("Following planes are in park (" + company.getName() + "):");
-        AirplanesUtils.printPlanesInfo(company.getAviapark());
+        return planes;
     }
 
 
