@@ -4,6 +4,10 @@ public class Plane extends AbstractPlane {
 
     private String m_planeName;
 
+    public Plane() {
+        super();
+    }
+
     public Plane(String name) {
         m_planeName = name;
     }

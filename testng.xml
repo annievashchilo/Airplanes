@@ -13,7 +13,7 @@
                 <include name="testCompanyCreated"/>
                 <include name="testCompanyNotCreated"/>
                 <include name="testCommonCapacity"/>
-                <include name="testSearchPlane"/>
+                <include name="testSearchPlaneByName"/>
             </methods>
             <parameter name="expectedName" value="Belavia"/>
             <parameter name="companyName" value="Lufthansa"/>

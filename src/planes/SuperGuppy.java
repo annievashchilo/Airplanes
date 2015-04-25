@@ -10,6 +10,11 @@ public class SuperGuppy extends Plane {
 
     public SuperGuppy(String name) {
         super(name);
+        m_name = name;
+    }
+
+    public SuperGuppy() {
+        super();
     }
 
     public float getCapacity() {

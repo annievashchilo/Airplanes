@@ -56,9 +56,9 @@ public class TestAviacompany extends BaseTest {
         logger.info("Verify common capacity in aviacompany");
 
         float capacitySumm = 0;
-        capacitySumm += new AN12("An-12").getCapacity();
-        capacitySumm += new AN225("An-225").getCapacity();
-        capacitySumm += new SuperGuppy("Super Guppy").getCapacity();
+        capacitySumm += new AN12().getCapacity();
+        capacitySumm += new AN225().getCapacity();
+        capacitySumm += new SuperGuppy().getCapacity();
 
         Assert.assertEquals(m_aviacompany.getCommonCapacity(), capacitySumm,
                 "Capacities are not equal as expected -> FAIL");
@@ -67,15 +67,16 @@ public class TestAviacompany extends BaseTest {
 
     @Parameters({"planeName"})
     @Test(groups = {"aviacompany"})
-    public void testSearchPlane(String planeName) {
+    public void testSearchPlaneByName(String planeName) {
         logger.info("Verify that expected plane belongs to aviacompany");
 
         for (Plane plane : m_aviacompany.getAviapark()) {
             if (plane.getName().equals(planeName)) {
-                logger.info("Plane '" + planeName + "' was successfully found -> OK");
+                System.out.println("Plane '" + planeName + "' was successfully found -> OK");
                 return;
             }
-            logger.error("Expected plane '" + planeName + "' was not found in aviapark -> FAIL");
         }
     }
+
+
 }

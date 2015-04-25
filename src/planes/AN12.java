@@ -13,6 +13,10 @@ public class AN12 extends Plane {
         m_name = name;
     }
 
+    public AN12() {
+        super();
+    }
+
     public float getCapacity() {
         return capacity;
     }

@@ -13,6 +13,10 @@ public class AN225 extends Plane {
         m_name = name;
     }
 
+    public AN225() {
+        super();
+    }
+
     public float getCapacity() {
         return capacity;
     }

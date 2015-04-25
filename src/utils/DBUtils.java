@@ -11,11 +11,11 @@ import java.util.Properties;
 
 public class DBUtils implements DataSrcUtils {
 
+    protected static PreparedStatement preparedStatement;
     private static volatile DBUtils instance;
     private static Connection c;
     private static ResultSet rs;
-    private static PreparedStatement preparedStatement;
-    private final String db_props = "database.properties";
+    protected final String db_props = "database.properties";
     private String user;
     private String password;
     private String driverName;
@@ -115,7 +115,7 @@ public class DBUtils implements DataSrcUtils {
 
         String stmt = "SELECT `company_name` FROM `aviacompanies` WHERE `company_name` = '" + companyName + "'";
         String company = null;
-        ResultSet rs = DBUtils.getInstance().executeRequest(stmt);
+        ResultSet rs = executeRequest(stmt);
 
         try {
             while (rs.next()) {
@@ -137,7 +137,7 @@ public class DBUtils implements DataSrcUtils {
     public void getAirplanes() {
         String stmt = "SELECT * FROM airplanes";
 
-        DBUtils dbUtils = DBUtils.getInstance();
+
         ResultSet rs = DBUtils.executeRequest(stmt);
 
         try {
