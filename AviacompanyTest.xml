@@ -1,5 +1,5 @@
 <suite>
-    <test name="ALL">
+    <test name="TestAviacompany">
         <!--<groups>-->
         <!--<run>-->
         <!--<include name="aviacompany"/>-->
@@ -9,7 +9,6 @@
         <!--</groups>-->
         <classes>
             <class name="tests.AviacompanyTest"/>
-            <class name="tests.DOMXmlParserTest"/>
             <!--<methods>-->
             <!--<include name="testCompanyCreated"/>-->
             <!--<include name="testCompanyNotCreated"/>-->
@@ -24,7 +23,7 @@
             <parameter name="invalidName" value="Belavia"/>
 
             <parameter name="minCapacity" value="0"/>
-            <parameter name="maxCapacity" value="9999999"/>
+            <parameter name="maxCapacity" value="0"/>
             <parameter name="minVolume" value="0"/>
             <parameter name="maxVolume" value="999999"/>
             <parameter name="minRange" value="0"/>

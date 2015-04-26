@@ -3,6 +3,7 @@ package main;
 import aviacompanies.Aviacompany;
 import exceptions.CompanyNotFoundException;
 import exceptions.PlaneNotFoundException;
+import org.apache.log4j.Logger;
 import planes.AN12;
 import planes.AN225;
 import planes.Plane;
@@ -20,18 +21,19 @@ import java.util.List;
 
 public class Runner {
 
+    public final static Logger logger = Logger.getLogger(Runner.class);
     protected static Aviacompany company;
 
     public static void main(String[] args) {
 
 
         Runner runner = new Runner();
-        redirectOutput();
+//        redirectOutput();
         runner.createCompany("Belavia");
 
         runner.sortPlanes();
 
-        System.out.println("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
+        logger.info("\nCommon capacity of all planes of aviacompany: " + company.getCommonCapacity());
 
         // looking for a plane by specific parameters
         runner.searchPlane(12999, 55420, 1500, 65000, 500, 1000, 100, 9999999);
@@ -45,14 +47,14 @@ public class Runner {
         xmlUtils.getAirplanes();
 
 
-        System.out.println();
+        logger.info("");
         //dbUtils.getAirplanes();
 
         try {
             //dbUtils.getAviacompany(company.getName());
             xmlUtils.getAviacompany(company.getName());
         } catch (CompanyNotFoundException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 

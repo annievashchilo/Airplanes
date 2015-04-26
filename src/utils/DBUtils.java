@@ -2,10 +2,12 @@ package utils;
 
 import exceptions.CompanyNotFoundException;
 import exceptions.DBNotFoundException;
+import planes.Plane;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -134,7 +136,7 @@ public class DBUtils implements DataSrcUtils {
     }
 
 
-    public void getAirplanes() {
+    public List<Plane> getAirplanes() {
         String stmt = "SELECT * FROM airplanes";
 
 
@@ -160,6 +162,7 @@ public class DBUtils implements DataSrcUtils {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        return null;
     }
 
 

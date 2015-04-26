@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.log4j.Logger;
 import planes.Plane;
 
 import java.util.Collections;
@@ -8,15 +9,16 @@ import java.util.List;
 
 public class AirplanesUtils {
 
+    public final static Logger logger = Logger.getLogger(AirplanesUtils.class);
 
     /**
      * prints all technical info of planes in aviacompany
      *
-     * @param planes
+     * @param planes – list of planes
      */
     public static void printPlanesInfo(List<Plane> planes) {
         for (Plane p : planes) {
-            System.out.println(p);
+            logger.info(p);
         }
     }
 

@@ -1,11 +1,14 @@
 package utils;
 
 import exceptions.CompanyNotFoundException;
+import planes.Plane;
+
+import java.util.List;
 
 
 public interface DataSrcUtils {
 
-    public String getAviacompany(String companyName) throws CompanyNotFoundException;
+    String getAviacompany(String companyName) throws CompanyNotFoundException;
 
-    public void getAirplanes();
+    List<Plane> getAirplanes();
 }
