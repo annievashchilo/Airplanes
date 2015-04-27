@@ -10,9 +10,7 @@ import utils.DOMXmlParser;
 
 import java.util.List;
 
-/**
- * Created by Anny on 26.04.15.
- */
+
 public class DOMXmlParserTest extends BaseTest {
 
     @BeforeClass(alwaysRun = true)
@@ -33,14 +31,13 @@ public class DOMXmlParserTest extends BaseTest {
     }
 
     @Parameters("companyName")
-    @Test(groups = "datautils")
-    public void testGetAviacompany(String companyName)
-            throws CompanyNotFoundException {
+    @Test(groups = "datautils", expectedExceptions = CompanyNotFoundException.class)
+    public void testGetAviacompany(String companyName) throws CompanyNotFoundException {
         System.out.println("Test get aviacompany from xml file");
 
-        String company = xml.getAviacompany(companyName);
+        xml.getAviacompany(companyName);
 
-        Assert.assertNotNull(company, "Company was not found in xml file-> FAIL!");
+        System.err.println("Company was not found in xml file-> FAIL!");
 
         System.out.println("Company was found in xml file -> OK!");
 

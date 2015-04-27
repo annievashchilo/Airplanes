@@ -4,9 +4,6 @@ import exceptions.CompanyNotFoundException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-/**
- * Created by Anny on 26.04.15.
- */
 public class DBUtilsTest extends BaseTest {
 
     @BeforeClass

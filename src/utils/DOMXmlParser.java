@@ -63,11 +63,12 @@ public class DOMXmlParser implements DataSrcUtils {
         return planes;
     }
 
-    public String getAviacompany(String companyName) {
+    public String getAviacompany(String companyName) throws CompanyNotFoundException {
         System.out.println("\nLooking for a company " + companyName + " in xml file");
         String company = null;
         try {
             Document doc = parseXML();
+
 
             company = doc.getDocumentElement().getAttribute("name");
             if (!company.equalsIgnoreCase(companyName))
