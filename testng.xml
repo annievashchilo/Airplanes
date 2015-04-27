@@ -23,13 +23,13 @@
             <parameter name="planeName" value="Ribka"/>
             <parameter name="invalidName" value="Belavia"/>
 
-            <parameter name="minCapacity" value="0"/>
+            <parameter name="minCapacity" value="1"/>
             <parameter name="maxCapacity" value="9999999"/>
-            <parameter name="minVolume" value="0"/>
+            <parameter name="minVolume" value="1"/>
             <parameter name="maxVolume" value="999999"/>
-            <parameter name="minRange" value="0"/>
+            <parameter name="minRange" value="1"/>
             <parameter name="maxRange" value="999999"/>
-            <parameter name="minSpeed" value="0"/>
+            <parameter name="minSpeed" value="1"/>
             <parameter name="maxSpeed" value="999999"/>
         </classes>
     </test>

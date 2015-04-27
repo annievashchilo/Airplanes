@@ -89,7 +89,7 @@ public class AviacompanyTest extends BaseTest {
             "maxRange",
             "minSpeed",
             "maxSpeed"})
-    @Test(groups = {"aviacompany"})
+    @Test(groups = {"aviacompany"}, expectedExceptions = PlaneNotFoundException.class)
     public void testFindPlane(
             float minCapacity,
             float maxCapacity,
