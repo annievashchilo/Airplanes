@@ -27,17 +27,14 @@ public class DOMXmlParserTest extends BaseTest {
             System.out.println(p.toString());
             System.out.println("Got all airplanes -> OK!");
         }
-
     }
 
     @Parameters("companyName")
-    @Test(groups = "datautils", expectedExceptions = CompanyNotFoundException.class)
-    public void testGetAviacompany(String companyName) throws CompanyNotFoundException {
+    @Test(groups = "datautils", expectedExceptions = {CompanyNotFoundException.class, AssertionError.class})
+    public void testIsCompanyPresent(String companyName) throws CompanyNotFoundException {
         System.out.println("Test get aviacompany from xml file");
 
-        xml.getAviacompany(companyName);
-
-        System.err.println("Company was not found in xml file-> FAIL!");
+        Assert.assertTrue(xml.isCompanyPresent(companyName));
 
         System.out.println("Company was found in xml file -> OK!");
 

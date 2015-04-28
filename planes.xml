@@ -23,7 +23,7 @@
             <range>100000</range>
         </plane>
     </aviacompany>
-    <aviacompany name="Lufthansa2">
+    <aviacompany name="Lufthansa">
         <plane id="4">
             <name>Boeing 737</name>
             <capacity>200</capacity>

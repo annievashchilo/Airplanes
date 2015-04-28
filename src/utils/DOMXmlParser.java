@@ -35,12 +35,9 @@ public class DOMXmlParser implements DataSrcUtils {
 
             NodeList nList = doc.getElementsByTagName("plane"); // get plane with all characteristics in aviacompany
 
-
             for (int temp = 0; temp < nList.getLength(); temp++) {
 
                 Node nNode = nList.item(temp);
-
-                System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
@@ -82,13 +79,33 @@ public class DOMXmlParser implements DataSrcUtils {
         return company;
     }
 
+    public boolean isCompanyPresent(String companyName) {
+        System.out.println("\nLooking for a company " + companyName + " in xml file");
+        boolean result = false;
+
+        try {
+            Document doc = parseXML();
+
+            NodeList nList = doc.getElementsByTagName("aviacompany"); // get plane with all characteristics in aviacompany
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+                if (nNode.getNodeValue().equals(companyName)) {
+                    result = true;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to parse the file" + e.getMessage());
+        }
+        return result;
+    }
+
     protected Document parseXML() {
         File xmlFile = new File(m_fileToParse);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = null;
         Document doc = null;
         try {
-            dBuilder = dbFactory.newDocumentBuilder();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(xmlFile);
             doc.getDocumentElement().normalize();
         } catch (ParserConfigurationException e) {

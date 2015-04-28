@@ -11,4 +11,6 @@ public interface DataSrcUtils {
     String getAviacompany(String companyName) throws CompanyNotFoundException;
 
     List<Plane> getAirplanes();
+
+    boolean isCompanyPresent(String company) throws CompanyNotFoundException;
 }

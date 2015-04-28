@@ -139,7 +139,6 @@ public class DBUtils implements DataSrcUtils {
     public List<Plane> getAirplanes() {
         String stmt = "SELECT * FROM airplanes";
 
-
         ResultSet rs = DBUtils.executeRequest(stmt);
 
         try {
@@ -163,6 +162,11 @@ public class DBUtils implements DataSrcUtils {
             System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public boolean isCompanyPresent(String company) throws CompanyNotFoundException {
+        String c = getAviacompany(company);
+        return !c.isEmpty();
     }
 
 
