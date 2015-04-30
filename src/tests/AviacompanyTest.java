@@ -3,6 +3,7 @@ package tests;
 import aviacompanies.Aviacompany;
 import exceptions.PlaneNotFoundException;
 import org.testng.Assert;
+import org.testng.TestException;
 import org.testng.annotations.*;
 import planes.AN12;
 import planes.AN225;
@@ -32,9 +33,9 @@ public class AviacompanyTest extends BaseTest {
     }
 
     @Parameters({"expectedName"})
-    @Test(groups = {"aviacompany"})
+    @Test(groups = {"aviacompany"}, priority = 1)
     public void testCompanyCreated(String expectedName) {
-        System.out.println("Verify that company with specified name was created");
+        System.out.println("TesCase1: Verify that company with specified name was created");
 
         Assert.assertEquals(company.getName(), expectedName,
                 "Company was not created - > FAIL");
@@ -42,18 +43,18 @@ public class AviacompanyTest extends BaseTest {
     }
 
     @Parameters({"companyName"})
-    @Test(groups = {"aviacompany"})
+    @Test(groups = {"aviacompany"}, priority = 2)
     public void testCompanyNotCreated(@Optional String companyName) {
-        System.out.println("Verify that company with specified name was NOT created");
+        System.out.println("TesCase2: Verify that company with specified name was NOT created");
 
         Assert.assertFalse(company.getName().equals(companyName),
                 "Company was created - > FAIL");
         System.out.println("Company was not created -> OK");
     }
 
-    @Test(groups = {"aviacompany"})
+    @Test(groups = {"aviacompany"}, priority = 3)
     public void testCommonCapacity() {
-        System.out.println("Verify common capacity in aviacompany");
+        System.out.println("TestCase3: Verify common capacity in aviacompany");
 
         float capacitySumm = 0;
         capacitySumm += new AN12().getCapacity();
@@ -66,9 +67,9 @@ public class AviacompanyTest extends BaseTest {
     }
 
     @Parameters({"planeName"})
-    @Test(groups = {"aviacompany"})
+    @Test(groups = {"aviacompany"}, priority = 4)
     public void testSearchPlaneByName(@Optional String planeName) {
-        System.out.println("Verify that expected plane belongs to aviacompany");
+        System.out.println("TestCase4: Verify that expected plane belongs to aviacompany");
 
         for (Plane plane : m_aviacompany.getAviapark()) {
             if (plane.getName().equals(planeName)) {
@@ -89,7 +90,8 @@ public class AviacompanyTest extends BaseTest {
             "maxRange",
             "minSpeed",
             "maxSpeed"})
-    @Test(groups = {"aviacompany"}, expectedExceptions = PlaneNotFoundException.class)
+    @Test(groups = {"aviacompany"}, expectedExceptions = {PlaneNotFoundException.class, TestException.class},
+            priority = 5)
     public void testFindPlane(
             float minCapacity,
             float maxCapacity,
@@ -99,7 +101,7 @@ public class AviacompanyTest extends BaseTest {
             float maxRange,
             float minSpeed,
             float maxSpeed) throws PlaneNotFoundException {
-        System.out.println("Test searching for a plane " +
+        System.out.println("TestCase5: Test searching for a plane " +
                 "by technical characteristics");
 
         List<Plane> searchResult = company.findPlane(
@@ -111,31 +113,34 @@ public class AviacompanyTest extends BaseTest {
                 maxRange,
                 minSpeed,
                 maxSpeed);
-        Assert.assertNotNull(searchResult, "No planes were found -> FAIL!");
+        Assert.assertFalse(searchResult.isEmpty(), "No planes were found -> FAIL!");
         for (Plane p : searchResult) {
             System.out.print("Plane found:... -> OK!");
             System.out.println(p);
         }
+
+
     }
 
     @Parameters("isEmpty")
     @Test(groups = "aviacompany", dependsOnMethods = "testCompanyCreated",
-            enabled = false)
+            enabled = false, priority = 6)
     public void testGetAviapark(@Optional String isEmpty) {
-        System.out.println("Verify that aviapark in company is not empty");
+        System.out.println("TestCase6: Verify that aviapark in company is not empty");
 
         Assert.assertNotNull(company.getAviapark());
     }
 
     @Parameters("planeName")
-    @Test(groups = "aviacompany")
+    @Test(groups = "aviacompany", priority = 7)
     public void testAddPlaneToPark(String planeName) {
+        System.out.println("TestCase7: Verify that it's possible to add plane to park");
 
         Plane p = new Plane(planeName);
         company.addPlaneToPark(p);
 
         Assert.assertTrue(company.getAviapark().contains(p),
-                "Plane was not added -> FAIL!");
+                "TestPlane was not added -> FAIL!");
         System.out.println("Plane was added -> OK!");
     }
 }

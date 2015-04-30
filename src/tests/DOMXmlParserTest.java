@@ -20,7 +20,7 @@ public class DOMXmlParserTest extends BaseTest {
 
     @Test(groups = "datautils")
     public void testGetAirplanes() {
-        System.out.println("Test get all airplanes from xml file");
+        System.out.println("TestCase1: Verify get all airplanes from xml file");
         List<Plane> planes = xml.getAirplanes();
         for (Plane p : planes) {
             Assert.assertNotNull(p, "Didn't get airplanes -> FAIL!");
@@ -30,9 +30,10 @@ public class DOMXmlParserTest extends BaseTest {
     }
 
     @Parameters("companyName")
-    @Test(groups = "datautils", expectedExceptions = {CompanyNotFoundException.class, AssertionError.class})
+    @Test(groups = "datautils", dependsOnMethods = "testGetAirplanes",
+            expectedExceptions = {CompanyNotFoundException.class, AssertionError.class})
     public void testIsCompanyPresent(String companyName) throws CompanyNotFoundException {
-        System.out.println("Test get aviacompany from xml file");
+        System.out.println("TestCase2: Verify get aviacompany from xml file");
 
         Assert.assertTrue(xml.isCompanyPresent(companyName));
 
